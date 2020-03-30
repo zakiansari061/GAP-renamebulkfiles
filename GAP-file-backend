@@ -27,7 +27,7 @@ function FileNaming(){
   var currentFolder1= DriveApp.getFolderById("FolderID3");
   var currentFolder2= DriveApp.getFolderById("FolderID2");
   var currentFolder3= DriveApp.getFolderById("FolderID");
-  var destination= DriveApp.getFolderById("Folder ID");
+  var destination= DriveApp.getFolderById("Folder ID destination");
   for(var i =2 ; i<=last; i++){
     var status = ss.getRange(i, 12).getValue();
     if (status==""){
