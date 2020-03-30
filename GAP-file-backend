@@ -1,0 +1,50 @@
+function renamePhoto() {
+  var regForm = SpreadsheetApp.openById("SheetID-1").getSheetByName("Sheet2"); // sheet which have file by id 
+  var lRow = regForm.getLastRow();  // get last row of the sheet 
+  
+  for(var h=2;h<=lRow;h++){
+    var title = regForm.getRange(h, 4).getValue();
+    var url1 = regForm.getRange(h, 6).getValue();
+    var url2 = regForm.getRange(h, 7).getValue();
+    var url3 = regForm.getRange(h, 8).getValue();
+    var docId1 = url1.match(/[-\w]{25,}/);   
+    Logger.log(docId1);
+    regForm.getRange(h, 9).setValue(docId1);
+    var docId2 = url2.match(/[-\w]{25,}/);
+    Logger.log(docId2);
+    regForm.getRange(h, 10).setValue(docId2);
+    var docId3 = url3.match(/[-\w]{25,}/);
+    Logger.log(docId3);
+    regForm.getRange(h, 11).setValue(docId3);
+  }
+}
+
+
+
+function FileNaming(){
+  var ss = SpreadsheetApp.openById("Sheetid1").getSheetByName("Sheet2");
+  var last = ss.getLastRow();
+  var currentFolder1= DriveApp.getFolderById("FolderID3");
+  var currentFolder2= DriveApp.getFolderById("FolderID2");
+  var currentFolder3= DriveApp.getFolderById("FolderID");
+  var destination= DriveApp.getFolderById("Folder ID");
+  for(var i =2 ; i<=last; i++){
+    var status = ss.getRange(i, 12).getValue();
+    if (status==""){
+      var name = ss.getRange(i, 4).getValue();
+      var fileId1 = ss.getRange(i, 9).getValue();
+      //DriveApp.getFileById(fileId1).setName(name);
+      DriveApp.getFileById(fileId1).makeCopy(name, destination);
+      //destination.addFile(DriveApp.getFileById(fileId1));
+      //currentFolder.removeFile(DriveApp.getFileById(fileId));
+      var fileId2 = ss.getRange(i, 10).getValue();
+      DriveApp.getFileById(fileId2).makeCopy(name, destination);
+      var fileId3 = ss.getRange(i, 11).getValue();
+      DriveApp.getFileById(fileId2).makeCopy(name, destination);
+      ss.getRange(i, 12).setValue("Yes");
+    }
+  }
+}
+
+
+ 
